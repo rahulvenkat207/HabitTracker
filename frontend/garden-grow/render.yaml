@@ -1,0 +1,14 @@
+service:
+  type: web
+  name: habit-tracker-frontend
+  runtime: static
+  plan: free
+  buildCommand: npm install && npm run build
+  staticPublishPath: dist
+  envVars:
+    - key: VITE_SUPABASE_URL
+      sync: false
+    - key: VITE_SUPABASE_ANON_KEY
+      sync: false
+    - key: VITE_API_URL
+      value: https://habit-tracker-backend.onrender.com

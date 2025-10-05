@@ -1,114 +1,101 @@
 # HabitGarden Frontend
 
-This is the frontend application for the Habit Tracker project, built with React, TypeScript, and Vite.
+Frontend for HabitGarden - A habit tracking application with gamification
+
+## Technologies Used
+
+- React with TypeScript
+- Vite
+- TailwindCSS
+- Shadcn/ui components
+- Supabase for Authentication
+- React Router for navigation
+- Zustand for state management
 
 ## Setup
 
-1. Install dependencies:
-```bash
-npm install
-```
+1. Clone the repository
+2. Navigate to the frontend directory: `cd frontend/garden-grow`
+3. Install dependencies: `npm install`
+4. Copy `.env.example` to `.env` and fill in the values
+5. Start the development server: `npm run dev`
 
-2. Create a `.env` file based on `.env.example`:
-```bash
-cp .env.example .env
-```
+## Scripts
 
-3. Update the `.env` file with your actual values:
-- `VITE_SUPABASE_URL`: Your Supabase project URL
-- `VITE_SUPABASE_ANON_KEY`: Your Supabase anonymous key
-- `VITE_API_URL`: The URL of your backend API (default: http://localhost:8080)
-
-## Development
-
-Start the development server:
-```bash
-npm run dev
-```
-
-## Supabase Configuration
-
-This frontend connects to Supabase for authentication and to the backend API for habit tracking functionality:
-
-1. **Supabase Authentication**: Uses the Supabase JavaScript client with the anonymous key for user authentication
-2. **Backend API**: Communicates with the Express backend for all habit-related operations
-
-Note: The Supabase service role key should only be used in the backend for security reasons. The frontend only needs the anonymous key for client-side operations.
+- `npm run dev` - Start the development server
+- `npm run build` - Build the production version
+- `npm run build:dev` - Build the development version
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview the production build locally
 
 ## Environment Variables
 
-- `VITE_SUPABASE_URL`: Your Supabase project URL (e.g., https://your-project.supabase.co)
-- `VITE_SUPABASE_ANON_KEY`: Your Supabase anonymous key (safe to expose in frontend)
-- `VITE_API_URL`: Your backend API URL (default: http://localhost:8080)
+Create a `.env` file in the frontend directory with the following variables:
 
-## Project info
-
-**URL**: https://lovable.dev/projects/ba30a417-9997-4139-aad2-ad2b994932c2
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/ba30a417-9997-4139-aad2-ad2b994932c2) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_API_URL=http://localhost:8080
 ```
 
-**Edit a file directly in GitHub**
+## Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Render Deployment (Frontend Only)
 
-**Use GitHub Codespaces**
+1. Fork this repository to your GitHub account
+2. Create a new Static Site on Render
+3. Connect your forked repository
+4. Set the root directory to `frontend/garden-grow`
+5. Render will automatically detect the service from `render.yaml`
+6. Add the required environment variables:
+   - `VITE_SUPABASE_URL`: your Supabase project URL
+   - `VITE_SUPABASE_ANON_KEY`: your Supabase anonymous key
+   - `VITE_API_URL`: your backend API URL (e.g., https://your-backend-service.onrender.com)
+7. Click "Create Static Site"
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+The application will automatically deploy and restart on every push to the main branch.
 
-## What technologies are used for this project?
+### Manual Render Configuration
 
-This project is built with:
+If you prefer to configure manually instead of using the `render.yaml` file:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Fork this repository to your GitHub account
+2. Create a new Static Site on Render
+3. Connect your forked repository
+4. Set the root directory to `frontend/garden-grow`
+5. Set the build command to: `npm install && npm run build`
+6. Set the publish directory to: `dist`
+7. Add the required environment variables:
+   - `VITE_SUPABASE_URL`: your Supabase project URL
+   - `VITE_SUPABASE_ANON_KEY`: your Supabase anonymous key
+   - `VITE_API_URL`: your backend API URL (e.g., https://your-backend-service.onrender.com)
+8. Click "Create Static Site"
 
-## How can I deploy this project?
+### Vercel Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/ba30a417-9997-4139-aad2-ad2b994932c2) and click on Share -> Publish.
+1. Fork this repository to your GitHub account
+2. Create a new project on Vercel
+3. Connect your forked repository
+4. Set the root directory to `frontend/garden-grow`
+5. Vercel will automatically detect the Vite project
+6. Add the required environment variables in the Vercel dashboard
+7. The application will automatically deploy on every push to the main branch
 
-## Can I connect a custom domain to my Lovable project?
+## Project Structure
 
-Yes, you can!
+- `src/components` - React components
+- `src/pages` - Page components
+- `src/hooks` - Custom React hooks
+- `src/lib` - Utility functions and API services
+- `src/state` - Application state management
+- `src/App.tsx` - Main application component
+- `src/main.tsx` - Application entry point
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Features
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- User authentication (sign up, sign in, sign out)
+- Habit creation and management
+- Progress tracking with calendar heatmap
+- Streak tracking and visualization
+- Responsive design for mobile and desktop
+- Dark mode support

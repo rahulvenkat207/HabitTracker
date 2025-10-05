@@ -1,123 +1,120 @@
 # HabitGarden Backend
 
-This is the backend API for HabitGarden, a habit tracking application with gamification features.
+Backend for HabitGarden - A habit tracking application with gamification
 
-## Tech Stack
+## Technologies Used
 
-- **Framework**: Express.js
-- **Database**: Supabase (PostgreSQL) with Drizzle ORM
-- **Authentication**: Supabase Auth (JWT)
-- **Language**: TypeScript
-
-## Project Structure
-
-```
-src/
-├── app.ts                 # Application entry point
-├── config/                # Configuration files
-│   ├── env.ts             # Environment variables validation
-│   ├── supabase.ts        # Supabase client configuration
-├── db/                    # Database related files
-│   ├── drizzle.config.ts  # Drizzle ORM configuration
-│   ├── schema/            # Database schema definitions
-│   ├── index.ts           # Database connection
-├── modules/               # Feature modules
-│   ├── auth/              # Authentication module
-│   ├── habits/            # Habits module
-│   ├── streaks/           # Streaks module
-│   ├── progress/          # Progress module
-├── middleware/            # Custom middleware
-│   ├── auth.middleware.ts # JWT authentication middleware
-│   ├── errorHandler.ts    # Global error handling
-├── utils/                 # Utility functions
-│   ├── logger.ts          # Logging utility
-│   ├── response.ts        # Standardized response format
-```
+- Node.js with Express
+- TypeScript
+- PostgreSQL with Drizzle ORM
+- Supabase for Authentication
+- Zod for validation
 
 ## Setup
 
-1. Copy `.env.example` to `.env` and fill in your values:
-   ```bash
-   cp .env.example .env
-   ```
+1. Clone the repository
+2. Navigate to the backend directory: `cd backend`
+3. Install dependencies: `npm install`
+4. Copy `.env.example` to `.env` and fill in the values
+5. Run database migrations: `npm run migrate`
+6. Start the development server: `npm run dev`
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-## Supabase Setup
-
-To run this backend, you'll need to set up a Supabase project:
-
-1. Go to [Supabase](https://supabase.com/) and create a new project
-2. Once your project is created, navigate to the Project Settings
-3. In the API section, you'll find:
-   - `SUPABASE_URL`: Your project URL
-   - `SUPABASE_ANON_KEY`: The public anon key
-   - `SUPABASE_SERVICE_ROLE_KEY`: The service role key (keep this secret!)
-4. For the `DATABASE_URL`, you can find it in the Database section under Connection String
-
-Update your `.env` file with these values:
-```env
-NODE_ENV=development
-PORT=8080
-SUPABASE_URL=your_actual_supabase_project_url
-SUPABASE_SERVICE_ROLE_KEY=your_actual_service_role_key
-SUPABASE_ANON_KEY=your_actual_anon_key
-DATABASE_URL=your_actual_postgres_connection_string
-```
-
-## Security
-
-### Row Level Security (RLS)
-
-This application implements Row Level Security (RLS) on all database tables to ensure that users can only access their own data. The following policies are enforced:
-
-- **Users table**: Users can only view, insert, and update their own user data
-- **Habits table**: Users can only view, insert, update, and delete their own habits
-- **Progress table**: Users can only view, insert, update, and delete their own progress records
-- **Streaks table**: Users can only view, insert, update, and delete their own streak records
-
-All policies use the `auth.uid()` function to verify that the authenticated user ID matches the user ID associated with the data.
-
-## Available Scripts
+## Scripts
 
 - `npm run build` - Compile TypeScript to JavaScript
-- `npm run start` - Start the production server
-- `npm run dev` - Start the development server with hot reloading
+- `npm start` - Start the production server
+- `npm run dev` - Start the development server with auto-reload
 - `npm run migrate` - Run database migrations
 - `npm run studio` - Open Drizzle Studio for database management
-
-## API Endpoints
-
-### Habits
-- `POST /habits` - Create a new habit
-- `GET /habits` - Get all user habits
-- `GET /habits/:id` - Get a specific habit
-- `PUT /habits/:id` - Update a habit
-- `DELETE /habits/:id` - Delete a habit
-
-### Streaks
-- `POST /streaks/:habitId/check` - Mark habit as done today
-- `GET /streaks/:habitId` - Get streak data
-- `PUT /streaks/:habitId` - Reset streak
-
-### Progress
-- `GET /progress/:habitId` - Get habit progress heatmap
-- `POST /progress/:habitId` - Mark specific date as complete
-- `DELETE /progress/:habitId/:date` - Unmark specific date
+- `npm run seed` - Seed the database with sample data
+- `npm run apply-rls` - Apply Row Level Security policies
 
 ## Environment Variables
 
-- `NODE_ENV` - Environment (development/production)
-- `PORT` - Server port
-- `SUPABASE_URL` - Supabase project URL
-- `SUPABASE_SERVICE_ROLE_KEY` - Supabase service role key (server-side operations)
-- `SUPABASE_ANON_KEY` - Supabase anonymous key (client-side operations)
-- `DATABASE_URL` - PostgreSQL connection string
+Create a `.env` file in the backend directory with the following variables:
+
+```
+NODE_ENV=development
+PORT=8080
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+SUPABASE_ANON_KEY=your_supabase_anon_key
+DATABASE_URL=your_postgresql_database_url
+```
+
+## Deployment
+
+### Render Deployment (Backend Only)
+
+1. Fork this repository to your GitHub account
+2. Create a new Web Service on Render
+3. Connect your forked repository
+4. Set the root directory to `backend`
+5. Render will automatically detect the service from `render.yaml`
+6. Add the required environment variables:
+   - `NODE_ENV`: production
+   - `PORT`: 8080
+   - `SUPABASE_URL`: your Supabase project URL
+   - `SUPABASE_SERVICE_ROLE_KEY`: your Supabase service role key
+   - `SUPABASE_ANON_KEY`: your Supabase anonymous key
+   - `DATABASE_URL`: your PostgreSQL database URL
+7. Click "Create Web Service"
+
+The application will automatically deploy and restart on every push to the main branch.
+
+### Manual Render Configuration
+
+If you prefer to configure manually instead of using the `render.yaml` file:
+
+1. Fork this repository to your GitHub account
+2. Create a new Web Service on Render
+3. Connect your forked repository
+4. Set the root directory to `backend`
+5. Set the build command to: `npm install && npm run build`
+6. Set the start command to: `npm start`
+7. Add the required environment variables:
+   - `NODE_ENV`: production
+   - `PORT`: 8080
+   - `SUPABASE_URL`: your Supabase project URL
+   - `SUPABASE_SERVICE_ROLE_KEY`: your Supabase service role key
+   - `SUPABASE_ANON_KEY`: your Supabase anonymous key
+   - `DATABASE_URL`: your PostgreSQL database URL
+8. Click "Create Web Service"
+
+### Railway Deployment
+
+1. Fork this repository to your GitHub account
+2. Create a new project on Railway
+3. Connect your forked repository
+4. Set the root directory to `backend`
+5. Railway will automatically detect the Node.js project
+6. Add the required environment variables in the Railway dashboard
+7. The application will automatically deploy on every push to the main branch
+
+## API Endpoints
+
+- `POST /auth/signup` - Register a new user
+- `POST /auth/signin` - Sign in an existing user
+- `GET /habits` - Get all habits for the authenticated user
+- `POST /habits` - Create a new habit
+- `PUT /habits/:id` - Update an existing habit
+- `DELETE /habits/:id` - Delete a habit
+- `GET /progress/:habitId` - Get progress data for a habit
+- `POST /progress/:habitId` - Mark progress for a habit on a specific date
+- `DELETE /progress/:habitId/:date` - Unmark progress for a habit on a specific date
+- `GET /streaks/:habitId` - Get streak data for a habit
+- `POST /streaks/:habitId/check` - Check and update streak for a habit
+- `PUT /streaks/:habitId` - Reset streak for a habit
+- `POST /debug-jwt` - Debug JWT token validation
+- `POST /test-jwt` - Test JWT validation with middleware
+- `GET /health` - Health check endpoint
+
+## Database Schema
+
+The application uses PostgreSQL with the following tables:
+- `users` - User information
+- `habits` - Habit definitions
+- `progress` - Habit progress tracking
+- `streaks` - Habit streak tracking
+
+Row Level Security (RLS) is enabled on all tables to ensure data isolation between users.

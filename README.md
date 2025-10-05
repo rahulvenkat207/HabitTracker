@@ -134,8 +134,59 @@ Both frontend and backend require environment variables to be set. Check the res
 
 ## Deployment
 
-### Frontend
-The frontend can be deployed to any static hosting service like Vercel, Netlify, or GitHub Pages.
+### Separate Deployment Approach
 
-### Backend
-The backend can be deployed to services like Railway, Render, or Heroku.
+This project is designed to deploy frontend and backend services separately, which provides more flexibility and scalability.
+
+### Backend Deployment
+
+Navigate to the [backend directory](file:///c:/VibeCoding_Projects/HabitTracker/backend) for detailed deployment instructions. The backend can be deployed to services like:
+- Render (using the provided `render.yaml`)
+- Railway
+- Heroku
+- Any cloud provider that supports Node.js applications
+
+### Frontend Deployment
+
+Navigate to the [frontend directory](file:///c:/VibeCoding_Projects/HabitTracker/frontend/garden-grow) for detailed deployment instructions. The frontend can be deployed to services like:
+- Render (using the provided `render.yaml`)
+- Vercel
+- Netlify
+- GitHub Pages
+- Any static hosting service
+
+### Render Deployment
+
+This project includes separate `render.yaml` files for easy deployment to Render:
+
+1. **Backend Deployment**:
+   - Go to the [backend directory](file:///c:/VibeCoding_Projects/HabitTracker/backend)
+   - Follow the Render deployment instructions in the backend README
+
+2. **Frontend Deployment**:
+   - Go to the [frontend/garden-grow directory](file:///c:/VibeCoding_Projects/HabitTracker/frontend/garden-grow)
+   - Follow the Render deployment instructions in the frontend README
+
+### Docker Deployment
+
+This project includes Dockerfiles for both frontend and backend services:
+
+1. Build the backend image:
+   ```bash
+   cd backend
+   docker build -t habitgarden-backend .
+   ```
+
+2. Build the frontend image:
+   ```bash
+   cd frontend/garden-grow
+   docker build -t habitgarden-frontend .
+   ```
+
+3. Run the containers:
+   ```bash
+   docker run -p 8080:8080 -e NODE_ENV=production -e PORT=8080 habitgarden-backend
+   docker run -p 3000:80 habitgarden-frontend
+   ```
+
+Note: You'll need to provide the required environment variables when running the containers.
