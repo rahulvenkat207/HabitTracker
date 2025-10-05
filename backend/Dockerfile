@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install --only=production
+# Install all dependencies including devDependencies for building
+RUN npm install
 
 # Copy source code
 COPY . .
@@ -21,11 +21,11 @@ EXPOSE 8080
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+RUN adduser -S appuser -u 1001
 
 # Change ownership of files to non-root user
-RUN chown -R nextjs:nodejs /app
-USER nextjs
+RUN chown -R appuser:nodejs /app
+USER appuser
 
 # Start the application
 CMD ["npm", "start"]
