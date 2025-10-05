@@ -81,6 +81,17 @@ If you prefer to configure manually instead of using the `render.yaml` file:
 6. Add the required environment variables in the Vercel dashboard
 7. The application will automatically deploy on every push to the main branch
 
+### Railway Deployment
+
+1. Fork this repository to your GitHub account
+2. Create a new project on Railway
+3. Connect your forked repository
+4. Set the root directory to `frontend/garden-grow`
+5. Railway will automatically detect the Dockerfile
+6. Add the required environment variables in the Railway dashboard
+7. See [RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md) for detailed instructions
+8. The application will automatically deploy on every push to the main branch
+
 ## Project Structure
 
 - `src/components` - React components

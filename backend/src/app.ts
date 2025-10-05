@@ -20,7 +20,20 @@ const PORT = env.PORT || 8080; // Use env config instead of hardcoded value
 
 // Middleware
 app.use(helmet());
-app.use(cors());
+// Update CORS configuration to allow Railway deployment
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:5173',
+    /\.vercel\.app$/,  // Vercel deployments
+    /\.railway\.app$/, // Railway deployments
+    /\.up\.railway\.app$/, // Your specific Railway deployment
+    'https://rare-integrity-production.up.railway.app'
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Debug endpoint for JWT validation

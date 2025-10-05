@@ -2,7 +2,19 @@ import { getAuthConfig } from './auth-utils';
 import { supabase } from './supabaseClient';
 
 // Define the base URL for the API
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+// Use the deployed backend URL in production, fallback to localhost in development
+// Get the API base URL using our helper function
+const API_BASE_URL = getApiBaseUrl();
+
+// Add a function to get the correct API base URL
+export function getApiBaseUrl(): string {
+  // In production, use the environment variable or fallback to the deployed backend
+  if (import.meta.env.PROD) {
+    return import.meta.env.VITE_API_URL || 'https://rare-integrity-production.up.railway.app';
+  }
+  // In development, use the environment variable or fallback to localhost
+  return import.meta.env.VITE_API_URL || 'http://localhost:8080';
+}
 
 // Define types for our API responses
 export interface ApiResponse<T> {

@@ -109,6 +109,16 @@ If you prefer to configure manually instead of using the `render.yaml` file:
 - `POST /test-jwt` - Test JWT validation with middleware
 - `GET /health` - Health check endpoint
 
+## Testing
+
+This backend includes several test scripts to verify API functionality:
+
+- `test-api.sh` - Bash script for Unix/Linux/MacOS
+- `test-api.bat` - Batch script for Windows
+- `test_api.py` - Comprehensive Python test script
+
+See [TESTING.md](TESTING.md) for detailed instructions on how to use these test scripts.
+
 ## Database Schema
 
 The application uses PostgreSQL with the following tables:

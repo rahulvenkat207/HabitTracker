@@ -16,7 +16,10 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Expose port
+# Remove devDependencies to reduce image size
+RUN npm prune --production
+
+# Expose port (Railway will use this or override with PORT env var)
 EXPOSE 8080
 
 # Create non-root user
